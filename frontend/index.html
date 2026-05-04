@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTEP Lab — Iniciar sesión</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-page">
+
+<div class="login-box">
+    <div class="login-logo">🔬</div>
+    <h1 class="login-title">Laboratorio INTEP</h1>
+    <p class="login-sub">Roldanillo, Valle del Cauca</p>
+
+    <div id="login-error" class="alert alert-error" style="display:none;"></div>
+
+    <div class="form-row">
+    <label>Correo electrónico</label>
+    <input type="email" id="email" placeholder="admin@intep.edu.co">
+    </div>
+    <div class="form-row">
+    <label>Contraseña</label>
+    <input type="password" id="password" placeholder="••••••••">
+    </div>
+    <button id="btn-login" onclick="hacerLogin()">Ingresar al sistema</button>
+</div>
+
+<script>
+    function hacerLogin() {
+    var email    = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    console.log('Email:', email, 'Pass:', password);
+
+    if (!email || !password) {
+        document.getElementById('login-error').textContent = 'Ingresa tu correo y contraseña';
+        document.getElementById('login-error').style.display = 'block';
+        return;
+    }
+
+    document.getElementById('btn-login').textContent = 'Ingresando...';
+
+    fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+        console.log('Respuesta:', data);
+        if (data.token) {
+        localStorage.setItem('token',  data.token);
+        localStorage.setItem('nombre', data.nombre);
+        localStorage.setItem('rol',    data.rol);
+        window.location.href = 'dashboard.html';
+        } else {
+        document.getElementById('login-error').textContent = data.error || 'Credenciales incorrectas';
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('btn-login').textContent = 'Ingresar al sistema';
+        }
+    })
+    .catch(function(err) {
+        console.error('Error:', err);
+        document.getElementById('login-error').textContent = 'Error de conexión con el servidor';
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('btn-login').textContent = 'Ingresar al sistema';
+    });
+    }
+</script>
+
+</body>
+</html>

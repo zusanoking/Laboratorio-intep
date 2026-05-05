@@ -41,7 +41,11 @@
 
     document.getElementById('btn-login').textContent = 'Ingresando...';
 
-    fetch('http://localhost:3000/api/auth/login', {
+// aqui borre la parte de la api 
+
+
+    const API_URL = "laboratorio-intep-production.up.railway.app"  // ESAT ES LA LINEA QUE AGREGRE NUEVA 
+    fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: password })

@@ -1,5 +1,5 @@
 // js/login.js
-const API = '/api';
+const API = 'laboratorio-intep-production.up.railway.app'; // ESTA FUE LA LINEA QUE AGREGE NUEVA 
 
 document.getElementById('btn-login').addEventListener('click', login);
 document.getElementById('password').addEventListener('keydown', e => {

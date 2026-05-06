@@ -40,16 +40,20 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 
 function showTab(tab, btn) {
 document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
 const seccion = document.getElementById('sec-' + tab);
 if (seccion) seccion.classList.add('active');
 if (btn) btn.classList.add('active');
+const titulos = { inicio:'🏠 Inicio', prestamo:'➕ Nuevo Préstamo', activos:'📦 Préstamos Activos', devoluciones:'📥 Devoluciones', inventario:'🗂️ Inventario' };
+const t = document.getElementById('page-title');
+if (t) t.textContent = titulos[tab] || '';
 if (tab === 'inicio')       cargarInicio();
 if (tab === 'activos')      cargarActivos();
 if (tab === 'devoluciones') cargarDevoluciones();
 if (tab === 'inventario')   cargarInventario();
 if (tab === 'prestamo')     cargarSelectArticulos();
 }
+
 
 function fmt(f) {
 if (!f) return '—';

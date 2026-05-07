@@ -269,17 +269,13 @@
 </div>
 </div>
 
-<script>
-
-const token  = localStorage.getItem('token');
-const nombre = localStorage.getItem('nombre');
-if (!token) window.location.href = 'index.html';
-document.getElementById('usuario-nombre').textContent = nombre || '';
-document.getElementById('fecha-top').textContent = new Date().toLocaleDateString('es-CO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-</script>
 <script src="js/dashboard.js"></script>
 <script src="js/inventario.js"></script>
 <script src="js/prestamos.js"></script>
 <script src="js/devoluciones.js"></script>
+<script>
+document.getElementById('usuario-nombre').textContent = nombre || '';
+document.getElementById('fecha-top').textContent = new Date().toLocaleDateString('es-CO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+</script>
 </body>
 </html>

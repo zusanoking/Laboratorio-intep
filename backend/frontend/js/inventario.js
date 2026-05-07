@@ -107,7 +107,7 @@ showAlert('✅ ' + data.mensaje);
 await cargarInventario();
 cargarInicio();
 }
-cargarInicio();
+
 
 
 

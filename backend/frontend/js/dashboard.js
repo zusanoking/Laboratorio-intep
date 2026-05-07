@@ -1,12 +1,5 @@
 // js/dashboard.js — utilidades compartidas y arranque del dashboard
 
-const API    = '/api';
-const token  = localStorage.getItem('token');
-const nombre = localStorage.getItem('nombre');
-
-if (!token) window.location.href = 'index.html';
-
-document.getElementById('usuario-nombre').textContent = '👤 ' + (nombre || '');
 
 function cerrarSesion() {
 localStorage.clear();

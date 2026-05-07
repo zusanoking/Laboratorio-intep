@@ -8,156 +8,208 @@
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-<div class="header-logo">
-    <div class="header-icon">🔬</div>
+<div class="app-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar-brand">
+    <div class="sidebar-logo">🔬</div>
     <div>
-    <h1>Laboratorio INTEP</h1>
-    <small>Sistema de Préstamos — Roldanillo, Valle del Cauca</small>
+        <div class="sidebar-title">INTEP Lab</div>
+        <div class="sidebar-sub">Roldanillo, Valle</div>
     </div>
-</div>
-<div class="header-right">
-    <span id="usuario-nombre" class="user-chip">👤 —</span>
-    <button class="btn btn-sm btn-gray" onclick="cerrarSesion()">Salir</button>
-</div>
-</div>
+    </div>
 
-<!-- NAV -->
-<div class="nav">
-<button class="nav-btn active" onclick="showTab('inicio', this)">🏠 Inicio</button>
-<button class="nav-btn" onclick="showTab('prestamo', this)">➕ Nuevo Préstamo</button>
-<button class="nav-btn" onclick="showTab('activos', this)">📦 Préstamos Activos</button>
-<button class="nav-btn" onclick="showTab('devoluciones', this)">📥 Devoluciones</button>
-<button class="nav-btn" onclick="showTab('inventario', this)">🗂️ Inventario</button>
-</div>
+    <nav class="sidebar-nav">
+    <div class="nav-label">MENÚ PRINCIPAL</div>
+    <button class="nav-item active" onclick="showTab('inicio', this)">
+        <span class="nav-icon">🏠</span>
+        <span>Inicio</span>
+    </button>
+    <button class="nav-item" onclick="showTab('prestamo', this)">
+        <span class="nav-icon">➕</span>
+        <span>Nuevo Préstamo</span>
+    </button>
+    <button class="nav-item" onclick="showTab('activos', this)">
+        <span class="nav-icon">📦</span>
+        <span>Préstamos Activos</span>
+    </button>
+    <button class="nav-item" onclick="showTab('devoluciones', this)">
+        <span class="nav-icon">📥</span>
+        <span>Devoluciones</span>
+    </button>
+    <button class="nav-item" onclick="showTab('inventario', this)">
+        <span class="nav-icon">🗂️</span>
+        <span>Inventario</span>
+    </button>
+    </nav>
 
-<div class="content">
-<div id="alert-box" style="display:none;"></div>
-
-<!-- INICIO -->
-<div id="sec-inicio" class="section active">
-    <div class="grid3">
-    <div class="stat-card"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Artículos en inventario</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-prestados">—</div><div class="stat-label">Préstamos activos</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-disponibles">—</div><div class="stat-label">Unidades disponibles</div></div>
-    </div>
-    <div class="card">
-    <div class="card-title">⚠️ Stock bajo</div>
-    <div id="stock-bajo"><div class="empty-state">Cargando...</div></div>
-    </div>
-    <div class="card">
-    <div class="card-title">🕐 Últimos movimientos</div>
-    <div id="ultimos-mov"><div class="empty-state">Cargando...</div></div>
-    </div>
-</div>
-
-<!-- NUEVO PRÉSTAMO -->
-<div id="sec-prestamo" class="section">
-    <div class="card">
-    <div class="card-title">👤 Datos de quien solicita</div>
-    <div class="grid2">
-        <div class="form-row">
-          <label>Tipo de persona *</label>
-        <select id="p-tipo"><option value="Estudiante">Estudiante</option><option value="Docente">Docente</option></select>
-        </div>
-        <div class="form-row">
-        <label>Identificación</label>
-        <input type="text" id="p-id" placeholder="Cédula o código">
-        </div>
-    </div>
-    <div class="form-row">
-        <label>Nombre completo *</label>
-        <input type="text" id="p-nombre" placeholder="Nombre completo">
-    </div>
-    <div class="form-row">
-        <label>Programa / Área</label>
-        <input type="text" id="p-programa" placeholder="Ej: Tecnología en Sistemas...">
-    </div>
-    </div>
-    <div class="card">
-    <div class="card-title">🔌 Artículo a prestar</div>
-    <div class="form-row">
-        <label>Seleccionar artículo *</label>
-        <select id="p-articulo" onchange="actualizarArticulo()">
-        <option value="">— Seleccionar —</option>
-        </select>
-    </div>
-    <div id="p-art-info" style="display:none;" class="art-info-box">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+    <div class="sidebar-footer">
+    <div class="sidebar-user">
+        <div class="sidebar-avatar">👤</div>
         <div>
-            <div id="p-art-nombre" class="item-name"></div>
-            <div id="p-art-cat" class="item-sub"></div>
-            <div id="p-art-desc" class="item-sub" style="max-width:260px;"></div>
-        </div>
-        <div style="text-align:right;">
-            <span id="p-art-disp" class="badge badge-in"></span><br>
-            <span id="p-art-total" style="font-size:11px;color:#888;"></span>
-        </div>
+        <div id="usuario-nombre" style="font-size:13px;font-weight:600;color:white;"></div>
+        <div style="font-size:11px;opacity:0.6;">Administrador</div>
         </div>
     </div>
-    <div class="form-row" id="p-cant-row" style="display:none;">
-        <label>Cantidad a prestar</label>
-        <input type="number" id="p-cantidad" min="1" value="1">
+    <button class="btn-salir" onclick="cerrarSesion()">Salir</button>
     </div>
-    <div class="form-row">
-        <label>Estado al prestar *</label>
-        <select id="p-estado">
-        <option value="Bueno">Bueno — sin daños visibles</option>
-        <option value="Regular">Regular — con detalles menores</option>
-        <option value="Malo">Malo — con daños</option>
-        </select>
-    </div>
-    <div class="form-row" id="p-completo-row" style="display:none;">
-        <label>¿Kit completo?</label>
-        <select id="p-completo">
-        <option value="Completo">Completo — todos los componentes</option>
-        <option value="Incompleto">Incompleto — especificar en observaciones</option>
-        </select>
-    </div>
-    <div class="form-row">
-        <label>Observaciones</label>
-        <textarea id="p-obs" placeholder="Daños visibles, piezas faltantes..."></textarea>
-    </div>
-<button class="btn btn-primary btn-block" onclick="registrarPrestamo()">✅ Registrar Préstamo</button>
-    </div>
-</div>
+</aside>
 
-<!-- PRÉSTAMOS ACTIVOS -->
-<div id="sec-activos" class="section">
-    <div class="card">
-    <div class="card-title">📦 Préstamos activos</div>
-    <input type="text" class="search-box" id="buscar-activos" placeholder="🔍 Buscar..." oninput="renderActivos()">
-    <div id="lista-activos"></div>
+<!-- CONTENIDO PRINCIPAL -->
+<main class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+    <div id="page-title" class="topbar-title">🏠 Inicio</div>
+    <div class="topbar-date" id="fecha-top"></div>
     </div>
-</div>
 
+    <div class="content">
+    <div id="alert-box" style="display:none;"></div>
 
-<!-- DEVOLUCIONES -->
-<div id="sec-devoluciones" class="section">
-    <div class="card">
-    <div class="card-title">📜 Historial de devoluciones</div>
-    <input type="text" class="search-box" id="buscar-dev" placeholder="🔍 Buscar..." oninput="renderDevoluciones()">
-    <div id="lista-devoluciones"></div>
+    <!-- INICIO -->
+    <div id="sec-inicio" class="section active">
+        <div class="grid3">
+        <div class="stat-card stat-azul">
+            <div class="stat-icon">📦</div>
+            <div class="stat-num" id="stat-total">—</div>
+            <div class="stat-label">Artículos en inventario</div>
+        </div>
+        <div class="stat-card stat-verde">
+            <div class="stat-icon">🔄</div>
+            <div class="stat-num" id="stat-prestados">—</div>
+            <div class="stat-label">Préstamos activos</div>
+        </div>
+        <div class="stat-card stat-dorado">
+            <div class="stat-icon">✅</div>
+            <div class="stat-num" id="stat-disponibles">—</div>
+            <div class="stat-label">Unidades disponibles</div>
+        </div>
+        </div>
+
+        <div class="grid2-dashboard">
+        <div class="card">
+            <div class="card-title">⚠️ Stock bajo</div>
+            <div id="stock-bajo"><div class="empty-state"><span class="empty-icon">⏳</span>Cargando...</div></div>
+        </div>
+        <div class="card">
+            <div class="card-title">🕐 Últimos movimientos</div>
+            <div id="ultimos-mov"><div class="empty-state"><span class="empty-icon">⏳</span>Cargando...</div></div>
+        </div>
+        </div>
     </div>
-</div>
 
+    <!-- NUEVO PRÉSTAMO -->
+    <div id="sec-prestamo" class="section">
+        <div class="form-grid">
+        <div class="card">
+            <div class="card-title">👤 Datos de quien solicita</div>
+            <div class="grid2">
+            <div class="form-row">
+                <label>Tipo de persona *</label>
+                <select id="p-tipo"><option value="Estudiante">Estudiante</option><option value="Docente">Docente</option></select>
+            </div>
+            <div class="form-row">
+                <label>Identificación</label>
+                <input type="text" id="p-id" placeholder="Cédula o código">
+            </div>
+            </div>
+            <div class="form-row">
+              <label>Nombre completo *</label>
+            <input type="text" id="p-nombre" placeholder="Nombre completo">
+            </div>
+            <div class="form-row">
+            <label>Programa / Área</label>
+            <input type="text" id="p-programa" placeholder="Ej: Tecnología en Sistemas...">
+            </div>
+        </div>
 
-<!-- INVENTARIO -->
-<div id="sec-inventario" class="section">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-    <span style="font-size:16px;font-weight:700;">🗂️ Inventario</span>
-    <div style="display:flex;gap:8px;">
-    <button class="btn btn-success btn-sm" onclick="importarDesdeSheets()">📊 Importar Google Sheets</button>
-    <button class="btn btn-primary btn-sm" onclick="openModal('modal-agregar')">+ Agregar artículo</button>
+        <div class="card">
+            <div class="card-title">🔌 Artículo a prestar</div>
+            <div class="form-row">
+              <label>Seleccionar artículo *</label>
+            <select id="p-articulo" onchange="actualizarArticulo()">
+                <option value="">— Seleccionar —</option>
+            </select>
+            </div>
+            <div id="p-art-info" style="display:none;" class="art-info-box">
+            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+                <div>
+                <div id="p-art-nombre" class="item-name"></div>
+                <div id="p-art-cat" class="item-sub"></div>
+                <div id="p-art-desc" class="item-sub" style="max-width:260px;"></div>
+                </div>
+                <div style="text-align:right;">
+                <span id="p-art-disp" class="badge badge-in"></span><br>
+                <span id="p-art-total" style="font-size:11px;color:#888;"></span>
+                </div>
+            </div>
+            </div>
+            <div class="form-row" id="p-cant-row" style="display:none;">
+            <label>Cantidad a prestar</label>
+            <input type="number" id="p-cantidad" min="1" value="1">
+            </div>
+            <div class="form-row">
+              <label>Estado al prestar *</label>
+            <select id="p-estado">
+                <option value="Bueno">Bueno — sin daños visibles</option>
+                <option value="Regular">Regular — con detalles menores</option>
+                <option value="Malo">Malo — con daños</option>
+            </select>
+            </div>
+            <div class="form-row" id="p-completo-row" style="display:none;">
+            <label>¿Kit completo?</label>
+            <select id="p-completo">
+                <option value="Completo">Completo — todos los componentes</option>
+                <option value="Incompleto">Incompleto — especificar en observaciones</option>
+            </select>
+            </div>
+            <div class="form-row">
+            <label>Observaciones</label>
+            <textarea id="p-obs" placeholder="Daños visibles, piezas faltantes..."></textarea>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="registrarPrestamo()">✅ Registrar Préstamo</button>
+        </div>
+        </div>
     </div>
-</div>
-<div class="card">
-    <input type="text" class="search-box" id="buscar-inv" placeholder="🔍 Buscar..." oninput="renderInventario()">
-    <div id="lista-inventario"></div>
-</div>
-</div>
 
+    <!-- PRÉSTAMOS ACTIVOS -->
+    <div id="sec-activos" class="section">
+        <div class="card">
+        <div class="card-title">📦 Préstamos activos</div>
+        <input type="text" class="search-box" id="buscar-activos" placeholder="🔍 Buscar por nombre o artículo..." oninput="renderActivos()">
+        <div id="lista-activos"></div>
+        </div>
+    </div>
+
+    <!-- DEVOLUCIONES -->
+    <div id="sec-devoluciones" class="section">
+        <div class="card">
+        <div class="card-title">📜 Historial de devoluciones</div>
+        <input type="text" class="search-box" id="buscar-dev" placeholder="🔍 Buscar..." oninput="renderDevoluciones()">
+        <div id="lista-devoluciones"></div>
+        </div>
+    </div>
+
+    <!-- INVENTARIO -->
+    <div id="sec-inventario" class="section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+        <span style="font-size:18px;font-weight:800;color:#1e293b;">🗂️ Inventario del laboratorio</span>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-success btn-sm" onclick="importarDesdeSheets()">📊 Importar Google Sheets</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('modal-agregar')">+ Agregar artículo</button>
+        </div>
+        </div>
+        <div class="card">
+        <input type="text" class="search-box" id="buscar-inv" placeholder="🔍 Buscar artículo..." oninput="renderInventario()">
+        <div id="lista-inventario"></div>
+        </div>
+    </div>
+
+    </div>
+</main>
+</div>
 
 <!-- MODAL DEVOLUCIÓN -->
 <div class="modal-bg" id="modal-devolucion">
@@ -217,17 +269,17 @@
 </div>
 </div>
 
-
+<script>
+const API    = '/api';
+const token  = localStorage.getItem('token');
+const nombre = localStorage.getItem('nombre');
+if (!token) window.location.href = 'index.html';
+document.getElementById('usuario-nombre').textContent = nombre || '';
+document.getElementById('fecha-top').textContent = new Date().toLocaleDateString('es-CO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+</script>
 <script src="js/dashboard.js"></script>
 <script src="js/inventario.js"></script>
 <script src="js/prestamos.js"></script>
 <script src="js/devoluciones.js"></script>
-
 </body>
 </html>
-
-
-
-
-
-

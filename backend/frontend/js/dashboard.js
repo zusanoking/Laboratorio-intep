@@ -1,5 +1,6 @@
 // js/dashboard.js — utilidades compartidas y arranque del dashboard
 
+const API = '/api';
 
 function cerrarSesion() {
 localStorage.clear();

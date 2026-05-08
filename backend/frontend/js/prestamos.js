@@ -46,43 +46,88 @@ function actualizarArticulo() {
   document.getElementById('p-completo-row').style.display = opt.dataset.esKit == '1' ? 'block' : 'none';
 }
 
+// esta es la funcion nueva que agregue 
+
 async function registrarPrestamo() {
   const nombre = document.getElementById('p-nombre').value.trim();
   const artId  = document.getElementById('p-articulo').value;
   const sel    = document.getElementById('p-articulo');
   const opt    = sel.options[sel.selectedIndex];
 
-  if (!nombre) { showAlert('⚠️ Ingresa el nombre de quien solicita', 'error'); return; }
-  if (!artId)  { showAlert('⚠️ Selecciona un artículo', 'error'); return; }
+  if (!nombre) {
+    showAlert('⚠️ Ingresa el nombre de quien solicita', 'error');
+    return;
+  }
+
+  if (!artId) {
+    showAlert('⚠️ Selecciona un artículo', 'error');
+    return;
+  }
 
   const esKit = opt.dataset.esKit == '1';
-  const body  = {
-    articulo_id:        parseInt(artId),
+
+  const body = {
+    articulo_id: parseInt(artId),
     nombre_solicitante: nombre,
-    tipo_persona:       document.getElementById('p-tipo').value,
-    identificacion:     document.getElementById('p-id').value.trim(),
-    programa:           document.getElementById('p-programa').value.trim(),
-    cantidad:           parseInt(opt.dataset.cantidad) > 1 ? parseInt(document.getElementById('p-cantidad').value) : 1,
-    estado_salida:      document.getElementById('p-estado').value,
-    completo_salida:    esKit ? document.getElementById('p-completo').value : 'N/A',
-    observaciones:      document.getElementById('p-obs').value.trim()
+    tipo_persona: document.getElementById('p-tipo').value,
+    identificacion: document.getElementById('p-id').value.trim(),
+    programa: document.getElementById('p-programa').value.trim(),
+    cantidad: parseInt(opt.dataset.cantidad) > 1
+      ? parseInt(document.getElementById('p-cantidad').value)
+      : 1,
+    estado_salida: document.getElementById('p-estado').value,
+    completo_salida: esKit
+      ? document.getElementById('p-completo').value
+      : 'N/A',
+    observaciones: document.getElementById('p-obs').value.trim()
   };
 
-  const res  = await apiFetch('/prestamos', { method: 'POST', body: JSON.stringify(body) });
+  const res = await apiFetch('/prestamos', {
+    method: 'POST',
+    body: JSON.stringify(body)
+  });
+
   const data = await res.json();
 
-  if (!res.ok) { showAlert('❌ ' + data.error, 'error'); return; }
-
-  ['p-nombre','p-id','p-programa','p-obs'].forEach(x => document.getElementById(x).value = '');
-  document.getElementById('p-articulo').value              = '';
-  document.getElementById('p-art-info').style.display      = 'none';
-  document.getElementById('p-cant-row').style.display      = 'none';
-  document.getElementById('p-completo-row').style.display  = 'none';
+  if (!res.ok) {
+    showAlert('❌ ' + data.error, 'error');
+    return;
+  }
 
   showAlert('✅ Préstamo registrado correctamente');
+
   await cargarSelectArticulos();
   cargarInicio();
+
+  const otraVez = confirm(
+    `✅ Préstamo registrado para ${nombre}.\n\n¿Desea agregar otro artículo ?`
+  );
+
+  if (otraVez) {
+
+    // Solo limpiar artículo
+    document.getElementById('p-articulo').value = '';
+    document.getElementById('p-art-info').style.display = 'none';
+    document.getElementById('p-cant-row').style.display = 'none';
+    document.getElementById('p-completo-row').style.display = 'none';
+    document.getElementById('p-obs').value = '';
+    document.getElementById('p-estado').value = 'Bueno';
+    document.getElementById('p-cantidad').value = 1;
+    document.getElementById('p-articulo')
+      .scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('p-articulo').focus();
+  } else {
+    // Limpiar todo
+    ['p-nombre','p-id','p-programa','p-obs']
+      .forEach(x => document.getElementById(x).value = '');
+    document.getElementById('p-articulo').value = '';
+    document.getElementById('p-art-info').style.display = 'none';
+    document.getElementById('p-cant-row').style.display = 'none';
+    document.getElementById('p-completo-row').style.display = 'none';
+  }
 }
+
+
 
 async function cargarActivos() {
   const res = await apiFetch('/prestamos');
@@ -160,4 +205,5 @@ async function confirmarDevolucion() {
   await cargarActivos();
   cargarInicio();
 }
+
 

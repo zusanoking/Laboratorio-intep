@@ -172,10 +172,20 @@
             <label>Observaciones</label>
             <textarea id="p-obs" placeholder="Daños visibles, piezas faltantes..."></textarea>
             </div>
-            <button class="btn btn-primary btn-block" onclick="registrarPrestamo()">✅ Registrar Préstamo</button>
+            <button class="btn btn-success btn-block" onclick="agregarAlCarrito()">+ Agregar artículo a la lista</button>
         </div>
         </div>
+        <!-- CARRITO -->
+<div class="card" style="margin-top:16px;">
+<div class="card-title">🛒 Artículos seleccionados</div>
+<div id="carrito-lista"></div>
+<button class="btn btn-primary btn-block" style="margin-top:12px;" onclick="registrarPrestamo()">✅ Confirmar Préstamo</button>
+</div>
     </div>
+
+
+
+
 
     <!-- PRÉSTAMOS ACTIVOS -->
     <div id="sec-activos" class="section">

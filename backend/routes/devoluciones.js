@@ -8,17 +8,14 @@ const authMW  = require('../middleware/auth');
 router.get('/', authMW, async (req, res) => {
   try {
     const [rows] = await db.query(`
-      SELECT
-        d.id, d.estado_retorno, d.completo_retorno,
-        d.observaciones, d.fecha_devolucion,
-        p.id AS prestamo_id,
+      SELECT d.*, 
         p.nombre_solicitante, p.tipo_persona, p.identificacion,
-        p.programa, p.cantidad, p.estado_salida, p.completo_salida,
-        p.observaciones AS obs_prestamo, p.fecha_prestamo,
+        p.programa, p.fecha_prestamo,
         i.nombre AS articulo_nombre, i.categoria, i.es_kit
-      FROM devoluciones d
-      JOIN prestamos p  ON d.prestamo_id = p.id
-      JOIN inventario i ON p.articulo_id = i.id
+      FROM detalle_prestamo d
+      JOIN prestamos p ON d.prestamo_id = p.id
+      JOIN inventario i ON d.articulo_id = i.id
+      WHERE d.devuelto = 1
       ORDER BY d.fecha_devolucion DESC
     `);
     res.json(rows);
@@ -27,42 +24,42 @@ router.get('/', authMW, async (req, res) => {
   }
 });
 
-// POST /api/devoluciones/:prestamo_id
-router.post('/:prestamo_id', authMW, async (req, res) => {
+// POST /api/devoluciones/:detalle_id
+router.post('/:detalle_id', authMW, async (req, res) => {
   const { estado_retorno, completo_retorno, observaciones } = req.body;
-  const prestamo_id = parseInt(req.params.prestamo_id);
-
+  const detalle_id = parseInt(req.params.detalle_id);
   if (!estado_retorno)
     return res.status(400).json({ error: 'El estado de retorno es requerido' });
-
   const conn = await db.getConnection();
   try {
     await conn.beginTransaction();
-
-    const [prs] = await conn.query(
-      'SELECT * FROM prestamos WHERE id = ? AND devuelto = 0',
-      [prestamo_id]
+    const [det] = await conn.query(
+      'SELECT * FROM detalle_prestamo WHERE id = ? AND devuelto = 0',
+      [detalle_id]
     );
-    if (prs.length === 0)
-      throw new Error('Préstamo no encontrado o ya fue devuelto');
-
-    const prestamo = prs[0];
-
+    if (det.length === 0) throw new Error('Detalle no encontrado o ya devuelto');
+    const detalle = det[0];
     await conn.query(
-      'INSERT INTO devoluciones (prestamo_id, estado_retorno, completo_retorno, observaciones, usuario_id) VALUES (?, ?, ?, ?, ?)',
-      [prestamo_id, estado_retorno, completo_retorno || 'N/A', observaciones || null, req.usuario.id]
+      `UPDATE detalle_prestamo SET 
+        devuelto = 1, estado_retorno = ?, completo_retorno = ?,
+        observaciones = CONCAT(IFNULL(observaciones,''), ' | Retorno: ', ?),
+        fecha_devolucion = NOW()
+      WHERE id = ?`,
+      [estado_retorno, completo_retorno || 'N/A',
+      observaciones || '', detalle_id]
     );
-
-    await conn.query(
-      'UPDATE prestamos SET devuelto = 1 WHERE id = ?',
-      [prestamo_id]
-    );
-
     await conn.query(
       'UPDATE inventario SET disponible = disponible + ? WHERE id = ?',
-      [prestamo.cantidad, prestamo.articulo_id]
+      [detalle.cantidad, detalle.articulo_id]
     );
-
+    // Si todos los detalles del préstamo están devueltos, marcar préstamo como devuelto
+    const [pendientes] = await conn.query(
+      'SELECT COUNT(*) as total FROM detalle_prestamo WHERE prestamo_id = ? AND devuelto = 0',
+      [detalle.prestamo_id]
+    );
+    if (pendientes[0].total === 0) {
+      await conn.query('UPDATE prestamos SET devuelto = 1 WHERE id = ?', [detalle.prestamo_id]);
+    }
     await conn.commit();
     res.json({ ok: true });
   } catch (e) {

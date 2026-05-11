@@ -65,7 +65,19 @@ router.get('/me', authMW, (req, res) => {
 });
 
 
-
+// Ruta temporal setup — ELIMINAR DESPUÉS
+router.get('/setup', async (req, res) => {
+  try {
+    const hash = await bcrypt.hash('intep2025', 10);
+    await db.query(
+      'INSERT IGNORE INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)',
+      ['Administrador INTEP', 'admin@intep.edu.co', hash, 'admin']
+    );
+    res.json({ ok: true, mensaje: 'Admin creado correctamente' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 
 module.exports = router;

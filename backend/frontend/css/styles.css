@@ -195,11 +195,12 @@ body {
   cursor: pointer; transition: all 0.2s;
   text-align: left; margin-bottom: 4px;
 }
-.nav-item:hover { background: rgba(255,255,255,0.08); color: white; transform: translateX(3px); }
-.nav-item.active {
-  background: linear-gradient(135deg, rgba(248,195,0,0.28), rgba(248,195,0,0.12));
-  color: white; font-weight: 700;
-  border-left: 3px solid var(--dorado);
+.nav-item:hover { background: rgba(255,255,255,0.10); color: white; transform: translateX(3px); }
+.nav-item.active { 
+  background: rgba(255,255,255,0.15);
+  color: white; 
+  font-weight: 700; 
+  border-left: 3px solid white; 
 }
 .nav-icon { font-size: 18px; width: 24px; text-align: center; }
 
@@ -275,7 +276,7 @@ body {
 }
 .stat-azul   { background: linear-gradient(135deg, #1a3a5c, #1e4a78); box-shadow: 0 8px 28px rgba(26,58,92,0.45); }
 .stat-verde  { background: linear-gradient(135deg, #005C9E, #2678b8); box-shadow: 0 8px 28px rgba(0,92,158,0.40); }
-.stat-dorado { background: linear-gradient(135deg, #F8C300, #d8a900); box-shadow: 0 8px 28px rgba(240,195,0,0.35); }
+.stat-dorado { background: linear-gradient(135deg, #0066c0, #0057A8); box-shadow: 0 8px 28px rgba(0,87,168,0.45); }
 .stat-icon  { font-size: 36px; opacity: 0.9; }
 .stat-num   { font-size: 38px; font-weight: 800; color: white; line-height: 1; }
 .stat-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 4px; }
@@ -346,7 +347,7 @@ textarea { min-height: 80px; resize: vertical; }
 /* ===================== BADGES ===================== */
 .badge { display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .badge-ok   { background: #d1fae5; color: #065f46; }
-.badge-warn { background: #fef3c7; color: #92400e; }
+.badge-warn { background: #dbeafe; color: #1e40af; }
 .badge-bad  { background: #fee2e2; color: #991b1b; }
 .badge-out  { background: #dbeafe; color: #1e40af; }
 .badge-in   { background: #d1fae5; color: #065f46; }

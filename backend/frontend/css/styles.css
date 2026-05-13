@@ -509,12 +509,12 @@ textarea { min-height: 80px; resize: vertical; }
 
 /* ===================== STATS NUEVAS ===================== */
 .stat-naranja { background: linear-gradient(135deg, #0738ec, #0015f5) !important; border-color: #fed7aa !important; }
-.stat-azul    { background: linear-gradient(135deg, #031ff4, #056cf4) !important; border-color: #bfdbfe !important; }
+.stat-azul    { background: linear-gradient(135deg, #02d9f6dc, #056cf4) !important; border-color: #bfdbfe !important; }
 .stat-verde   { background: linear-gradient(135deg, #055aec, #0219e6) !important; border-color: #bbf7d0 !important; }
 
 .stat-icon-naranja { background: #0057A8 !important; border-radius: 16px !important; }
 .stat-icon-azul    { background: #0057A8 !important; border-radius: 16px !important; }
-.stat-icon-verde   { background: #03b8ff !important; border-radius: 16px !important; }
+.stat-icon-verde   { background: #0057A8 !important; border-radius: 16px !important; }
 
 /* ===================== MOVIMIENTOS NUEVO ESTILO ===================== */
 .mov-icon-wrap {
@@ -522,8 +522,8 @@ textarea { min-height: 80px; resize: vertical; }
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; flex-shrink: 0;
 }
-.mov-icon-wrap.prestado { background: #fee2e2; }
-.mov-icon-wrap.devuelto { background: #dcfce7; }
+.mov-icon-wrap.prestado { background: #4f52f4; }
+.mov-icon-wrap.devuelto { background: #3a25fb; }
 
 
 

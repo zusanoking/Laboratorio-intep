@@ -185,8 +185,6 @@
 
 
 
-
-
     <!-- PRÉSTAMOS ACTIVOS -->
     <div id="sec-activos" class="section">
         <div class="card">
@@ -205,23 +203,22 @@
         </div>
     </div>
 
-    <!-- INVENTARIO -->
-    <div id="sec-inventario" class="section">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-        <span style="font-size:18px;font-weight:800;color:#1e293b;">🗂️ Inventario del laboratorio</span>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-success btn-sm" onclick="importarDesdeSheets()">📊 Importar Google Sheets</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-agregar')">+ Agregar artículo</button>
-        </div>
-        </div>
-        <div class="card">
-        <input type="text" class="search-box" id="buscar-inv" placeholder="🔍 Buscar artículo..." oninput="renderInventario()">
-        <div id="lista-inventario"></div>
-        </div>
+<!-- INVENTARIO -->
+<div id="sec-inventario" class="section">
+<div class="inv-toolbar">
+    <div class="inv-search-wrap">
+    <span class="inv-search-icon">🔍</span>
+    <input type="text" id="buscar-inv" placeholder="Buscar artículos..." oninput="renderInventario()" class="inv-search">
     </div>
-
+    <div style="display:flex;gap:10px;">
+    <button class="btn btn-warning" onclick="importarDesdeSheets()">🗂️ Inventariar artículo</button>
+    <button class="btn btn-primary" onclick="openModal('modal-agregar')">+ Agregar artículo</button>
     </div>
-</main>
+</div>
+<div class="card" style="padding:0;overflow:hidden;">
+    <div class="inv-header">🗂️ Inventario del laboratorio</div>
+    <div id="lista-inventario"></div>
+</div>
 </div>
 
 <!-- MODAL DEVOLUCIÓN -->

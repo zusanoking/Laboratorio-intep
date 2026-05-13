@@ -17,20 +17,38 @@ if (lista.length === 0) {
     c.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div>Sin artículos registrados</div>';
     return;
 }
-c.innerHTML = lista.map(a => `
-    <div class="item-row">
-    <div style="flex:1;min-width:0;">
-        <div class="item-name">${a.nombre}</div>
-        <div class="item-sub">${a.categoria}${a.serie ? ' · ' + a.serie : ''}</div>
-        ${a.descripcion ? `<div class="item-sub">${a.descripcion}</div>` : ''}
-    </div>
-    <div class="item-actions">
-        <span class="qty-badge">${a.disponible}/${a.cantidad}</span>
-        <span class="badge ${a.disponible === 0 ? 'badge-bad' : a.disponible < a.cantidad ? 'badge-warn' : 'badge-ok'}">
-        ${a.disponible === 0 ? 'Agotado' : a.disponible < a.cantidad ? 'Parcial' : 'Disponible'}
-        </span>
-    </div>
-    </div>`).join('');
+c.innerHTML = `
+    <table class="inv-table">
+    <thead>
+        <tr>
+        <th>ARTÍCULO</th>
+        <th>CATEGORÍA</th>
+        <th>CANTIDAD</th>
+        <th>ESTADO</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${lista.map(a => `
+        <tr>
+            <td>
+            <div class="inv-item">
+                <div class="inv-icon">🗂️</div>
+                <div>
+                <div class="item-name">${a.nombre}</div>
+                ${a.serie ? `<div class="item-sub">${a.serie}</div>` : ''}
+                </div>
+            </div>
+            </td>
+            <td><span class="cat-badge">${a.categoria}</span></td>
+            <td><strong>${a.cantidad}</strong></td>
+            <td>
+            <span class="disp-badge ${a.disponible === 0 ? 'disp-rojo' : a.disponible < a.cantidad ? 'disp-naranja' : 'disp-verde'}">
+                ${a.disponible === 0 ? 'Sin stock' : a.disponible + ' disponible' + (a.disponible !== 1 ? 's' : '')}
+            </span>
+            </td>
+        </tr>`).join('')}
+    </tbody>
+    </table>`;
 }
 
 async function agregarArticulo() {
@@ -107,7 +125,7 @@ showAlert('✅ ' + data.mensaje);
 await cargarInventario();
 cargarInicio();
 }
-
+cargarInicio();
 
 
 

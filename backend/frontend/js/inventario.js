@@ -14,7 +14,7 @@ const lista = _inventario.filter(a =>
 );
 const c = document.getElementById('lista-inventario');
 if (lista.length === 0) {
-    c.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div>Sin artículos registrados</div>';
+    c.innerHTML = '<div class="empty-state"><span class="empty-icon">📦</span>Sin artículos registrados</div>';
     return;
 }
 c.innerHTML = `
@@ -76,6 +76,7 @@ cargarInicio();
 }
 
 async function cargarInicio() {
+  // Cargar inventario
 const res  = await apiFetch('/inventario');
 const inv  = await res.json();
 _inventario = inv;
@@ -83,40 +84,42 @@ _inventario = inv;
 document.getElementById('stat-total').textContent       = inv.length;
 document.getElementById('stat-disponibles').textContent = inv.reduce((s, a) => s + a.disponible, 0);
 
+  // Stock bajo
 const sb    = document.getElementById('stock-bajo');
 const bajos = inv.filter(a => a.disponible < Math.ceil(a.cantidad / 2) && a.cantidad > 1);
-um.innerHTML = prs.length === 0
-? '<div class="empty-state"><span class="empty-icon">🕐</span>Sin movimientos recientes</div>'
-: prs.slice(0, 5).map(p => {
-    const cant = p.detalles ? p.detalles.reduce((s,d) => s + d.cantidad, 0) : 1;
-    return `
-        <div class="mov-row">
-        <div class="mov-icon-wrap prestado">📉</div>
-        <div class="mov-info">
-            <div class="mov-nombre">${p.nombre_solicitante}</div>
-            <div class="mov-detalle">${p.detalles?.[0]?.articulo_nombre || ''} • ${fmt(p.fecha_prestamo)}</div>
+sb.innerHTML = bajos.length === 0
+    ? '<div class="empty-state">✅ Sin alertas de stock</div>'
+    : bajos.map(a => `
+        <div class="stock-row">
+        <div>
+            <div class="stock-nombre">${a.nombre}</div>
+            <div class="stock-cat">${a.categoria}</div>
         </div>
-        <div class="mov-cant menos">-${cant}</div>
-        </div>`;
-    }).join('');
+        <div class="stock-cant">${a.disponible}/${a.cantidad} disponibles</div>
+        </div>`).join('');
 
+  // Préstamos activos
 const res2 = await apiFetch('/prestamos');
 const prs  = await res2.json();
 document.getElementById('stat-prestados').textContent = prs.length;
 
+  // Últimos movimientos
 const um = document.getElementById('ultimos-mov');
 um.innerHTML = prs.length === 0
-    ? '<div class="empty-state">🕐 Sin movimientos recientes</div>'
-    : prs.slice(0, 6).map(p => `
-        <div class="item-row">
-        <div>
-            <div class="item-name">${p.articulo_nombre}</div>
-            <div class="item-sub">${p.nombre_solicitante} · ${p.tipo_persona} · ${fmt(p.fecha_prestamo)}</div>
-        </div>
-        <span class="badge badge-out">Prestado</span>
-        </div>`).join('');
+    ? '<div class="empty-state"><span class="empty-icon">🕐</span>Sin movimientos recientes</div>'
+    : prs.slice(0, 5).map(p => {
+        const cant = p.detalles ? p.detalles.reduce((s, d) => s + d.cantidad, 0) : 1;
+        return `
+        <div class="mov-row">
+            <div class="mov-icon-wrap prestado">📉</div>
+            <div class="mov-info">
+            <div class="mov-nombre">${p.nombre_solicitante}</div>
+            <div class="mov-detalle">${p.detalles?.[0]?.articulo_nombre || ''} • ${fmt(p.fecha_prestamo)}</div>
+            </div>
+            <div class="mov-cant menos">-${cant}</div>
+        </div>`;
+    }).join('');
 }
-
 
 async function importarDesdeSheets() {
 if (!confirm('¿Importar inventario desde Google Sheets? Los artículos existentes se actualizarán.')) return;
@@ -132,7 +135,5 @@ showAlert('✅ ' + data.mensaje);
 await cargarInventario();
 cargarInicio();
 }
+
 cargarInicio();
-
-
-

@@ -508,9 +508,9 @@ textarea { min-height: 80px; resize: vertical; }
 .icon-naranja{ background: #ffedd5; }
 
 /* ===================== STATS NUEVAS ===================== */
-.stat-naranja { background: linear-gradient(135deg, #fff7ed, #ffedd5) !important; border-color: #fed7aa !important; }
-.stat-azul    { background: linear-gradient(135deg, #eff6ff, #dbeafe) !important; border-color: #bfdbfe !important; }
-.stat-verde   { background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important; border-color: #bbf7d0 !important; }
+.stat-naranja { background: linear-gradient(135deg, #0738ec, #0015f5) !important; border-color: #fed7aa !important; }
+.stat-azul    { background: linear-gradient(135deg, #031ff4, #056cf4) !important; border-color: #bfdbfe !important; }
+.stat-verde   { background: linear-gradient(135deg, #055aec, #0219e6) !important; border-color: #bbf7d0 !important; }
 
 .stat-icon-naranja { background: #0057A8 !important; border-radius: 16px !important; }
 .stat-icon-azul    { background: #0057A8 !important; border-radius: 16px !important; }

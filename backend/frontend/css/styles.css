@@ -336,7 +336,7 @@ textarea { min-height: 80px; resize: vertical; }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,92,0.45); }
 .btn-success { background: linear-gradient(135deg, var(--dorado), var(--dorado-dark)); color: #1e293b; box-shadow: 0 4px 14px rgba(248,195,110,0,0.35); }
 .btn-success:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(248,155,195,0,0.45); }
-.btn-warning { background: linear-gradient(135deg, var(--dorado), #d4920a); color: white; box-shadow: 0 4px 14px rgba(240,165,0,0.35); }
+.btn-warning { background: linear-gradient(135deg, var(--dorado), #03c8ef); color: white; box-shadow: 0 4px 14px rgba(0, 144, 240, 0.81); }
 .btn-danger  { background: white; color: var(--rojo); border-color: var(--rojo); }
 .btn-danger:hover { background: #fff5f5; }
 .btn-gray    { background: white; color: var(--texto-sub); border-color: #e2e8f0; }
@@ -494,7 +494,7 @@ textarea { min-height: 80px; resize: vertical; }
 }
 .disp-verde   { background: #dcfce7; color: #15803d; }
 .disp-naranja { background: #fff7ed; color: #1e40af; }
-.disp-rojo    { background: #fee2e2; color: #009dff; }
+.disp-rojo    { background: #fee2e2; color: #2f00ff; }
 
 /* ===================== FORM CARDS CON ICONO ===================== */
 .card-title-icon {

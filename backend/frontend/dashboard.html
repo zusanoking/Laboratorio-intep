@@ -103,88 +103,102 @@
         </div>
     </div>
 
-    <!-- NUEVO PRÉSTAMO -->
-    <div id="sec-prestamo" class="section">
-        <div class="form-grid">
-        <div class="card">
-            <div class="card-title">👤 Datos de quien solicita</div>
-            <div class="grid2">
-            <div class="form-row">
-                <label>Tipo de persona *</label>
-                <select id="p-tipo"><option value="Estudiante">Estudiante</option><option value="Docente">Docente</option></select>
-            </div>
-            <div class="form-row">
-                <label>Identificación</label>
-                <input type="text" id="p-id" placeholder="Cédula o código">
-            </div>
-            </div>
-            <div class="form-row">
-              <label>Nombre completo *</label>
-            <input type="text" id="p-nombre" placeholder="Nombre completo">
-            </div>
-            <div class="form-row">
-            <label>Programa / Área</label>
-            <input type="text" id="p-programa" placeholder="Ej: Tecnología en Sistemas...">
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="card-title">🔌 Artículo a prestar</div>
-            <div class="form-row">
-              <label>Seleccionar artículo *</label>
-            <select id="p-articulo" onchange="actualizarArticulo()">
-                <option value="">— Seleccionar —</option>
-            </select>
-            </div>
-            <div id="p-art-info" style="display:none;" class="art-info-box">
-            <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-                <div>
-                <div id="p-art-nombre" class="item-name"></div>
-                <div id="p-art-cat" class="item-sub"></div>
-                <div id="p-art-desc" class="item-sub" style="max-width:260px;"></div>
-                </div>
-                <div style="text-align:right;">
-                <span id="p-art-disp" class="badge badge-in"></span><br>
-                <span id="p-art-total" style="font-size:11px;color:#888;"></span>
-                </div>
-            </div>
-            </div>
-            <div class="form-row" id="p-cant-row" style="display:none;">
-            <label>Cantidad a prestar</label>
-            <input type="number" id="p-cantidad" min="1" value="1">
-            </div>
-            <div class="form-row">
-              <label>Estado al prestar *</label>
-            <select id="p-estado">
-                <option value="Bueno">Bueno — sin daños visibles</option>
-                <option value="Regular">Regular — con detalles menores</option>
-                <option value="Malo">Malo — con daños</option>
-            </select>
-            </div>
-            <div class="form-row" id="p-completo-row" style="display:none;">
-            <label>¿Kit completo?</label>
-            <select id="p-completo">
-                <option value="Completo">Completo — todos los componentes</option>
-                <option value="Incompleto">Incompleto — especificar en observaciones</option>
-            </select>
-            </div>
-            <div class="form-row">
-            <label>Observaciones</label>
-            <textarea id="p-obs" placeholder="Daños visibles, piezas faltantes..."></textarea>
-            </div>
-            <button class="btn btn-success btn-block" onclick="agregarAlCarrito()">+ Agregar artículo a la lista</button>
-        </div>
-        </div>
-        <!-- CARRITO -->
-<div class="card" style="margin-top:16px;">
-<div class="card-title">🛒 Artículos seleccionados</div>
-<div id="carrito-lista"></div>
-<button class="btn btn-primary btn-block" style="margin-top:12px;" onclick="registrarPrestamo()">✅ Confirmar Préstamo</button>
-</div>
+<!-- NUEVO PRÉSTAMO -->
+<div id="sec-prestamo" class="section">
+<div class="card">
+    <div class="card-title">
+    <div class="card-title-icon icon-azul">👤</div>
+    Datos de quien solicita
     </div>
+    <div class="grid2">
+    <div class="form-row">
+        <label>Tipo de persona <span style="color:#ef4444">*</span></label>
+        <select id="p-tipo"><option value="Estudiante">Estudiante</option><option value="Docente">Docente</option></select>
+    </div>
+    <div class="form-row">
+        <label>Identificación <span style="color:#ef4444">*</span></label>
+        <input type="text" id="p-id" placeholder="Cédula o código">
+    </div>
+    </div>
+    <div class="form-row">
+    <label>Nombre completo <span style="color:#ef4444">*</span></label>
+    <input type="text" id="p-nombre" placeholder="Nombre completo">
+    </div>
+    <div class="form-row">
+    <label>Programa / Área</label>
+    <input type="text" id="p-programa" placeholder="Ej. Tecnología en Sistemas...">
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+    <div class="card-title-icon icon-verde">📦</div>
+    Artículo a prestar
+    </div>
+    <div class="form-row">
+    <label>Seleccionar artículo <span style="color:#ef4444">*</span></label>
+    <select id="p-articulo" onchange="actualizarArticulo()">
+        <option value="">— Seleccionar artículo —</option>
+    </select>
+    </div>
+    <div id="p-art-info" style="display:none;" class="art-info-box">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div>
+        <div id="p-art-nombre" class="item-name"></div>
+        <div id="p-art-cat" class="item-sub"></div>
+        <div id="p-art-desc" class="item-sub" style="max-width:260px;"></div>
+        </div>
+        <div style="text-align:right;">
+        <span id="p-art-disp" class="badge badge-in"></span><br>
+        <span id="p-art-total" style="font-size:11px;color:#888;"></span>
+        </div>
+    </div>
+    </div>
+    <div class="form-row" id="p-cant-row" style="display:none;">
+    <label>Cantidad a prestar</label>
+    <input type="number" id="p-cantidad" min="1" value="1">
+    </div>
+    <div class="form-row">
+    <label>Estado al prestar <span style="color:#ef4444">*</span></label>
+    <select id="p-estado">
+        <option value="Bueno">Bueno — sin daños visibles</option>
+        <option value="Regular">Regular — con detalles menores</option>
+        <option value="Malo">Malo — con daños</option>
+    </select>
+    </div>
+    <div class="form-row" id="p-completo-row" style="display:none;">
+    <label>¿Kit completo?</label>
+    <select id="p-completo">
+        <option value="Completo">Completo — todos los componentes</option>
+        <option value="Incompleto">Incompleto — especificar en observaciones</option>
+    </select>
+    </div>
+    <div class="form-row">
+    <label>Observaciones</label>
+    <textarea id="p-obs" placeholder="Daños visibles, piezas faltantes..."></textarea>
+    </div>
+    <button class="btn btn-primary btn-block" onclick="agregarAlCarrito()">+ Agregar artículo a la lista</button>
+</div>
+
+<div class="card">
+    <div class="card-title">
+    <div class="card-title-icon icon-morado">🛒</div>
+    Artículos seleccionados
+    </div>
+    <div id="carrito-lista">
+    <div class="empty-state">
+        <span class="empty-icon">📦</span>
+        Sin artículos agregados aún
+    </div>
+    </div>
+    <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="registrarPrestamo()"> Confirmar Préstamo</button>
+</div>
+</div>
 
 
 
+    </div>
     <!-- PRÉSTAMOS ACTIVOS -->
     <div id="sec-activos" class="section">
         <div class="card">
@@ -247,7 +261,7 @@
     </div>
     <div class="modal-footer">
     <button class="btn btn-gray" onclick="closeModal('modal-devolucion')">Cancelar</button>
-    <button class="btn btn-success" onclick="confirmarDevolucion()">✅ Confirmar</button>
+    <button class="btn btn-success" onclick="confirmarDevolucion()"> Confirmar</button>
     </div>
 </div>
 </div>

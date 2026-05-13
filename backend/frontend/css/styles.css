@@ -4,8 +4,8 @@
   --azul:       #005C9E;
   --azul-dark:  #00497d;
   --azul-mid:   #2678b8;
-  --dorado:     #F8C300;
-  --dorado-dark:#d8a900;
+  --dorado:     #0088f8;
+  --dorado-dark:#0053d8;
   --blanco:     #FFFFFF;
   --rojo:       #ef4444;
   --sidebar-w:  260px;
@@ -512,9 +512,9 @@ textarea { min-height: 80px; resize: vertical; }
 .stat-azul    { background: linear-gradient(135deg, #02d9f6dc, #056cf4) !important; border-color: #bfdbfe !important; }
 .stat-verde   { background: linear-gradient(135deg, #055aec, #0219e6) !important; border-color: #bbf7d0 !important; }
 
-.stat-icon-naranja { background: #0057A8 !important; border-radius: 16px !important; }
-.stat-icon-azul    { background: #0057A8 !important; border-radius: 16px !important; }
-.stat-icon-verde   { background: #0057A8 !important; border-radius: 16px !important; }
+.stat-icon-naranja { background: #f6f6f6 !important; border-radius: 16px !important; }
+.stat-icon-azul    { background: #fdfdfd !important; border-radius: 16px !important; }
+.stat-icon-verde   { background: #fcfeff !important; border-radius: 16px !important; }
 
 /* ===================== MOVIMIENTOS NUEVO ESTILO ===================== */
 .mov-icon-wrap {

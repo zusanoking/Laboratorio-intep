@@ -85,13 +85,20 @@ document.getElementById('stat-disponibles').textContent = inv.reduce((s, a) => s
 
 const sb    = document.getElementById('stock-bajo');
 const bajos = inv.filter(a => a.disponible < Math.ceil(a.cantidad / 2) && a.cantidad > 1);
-sb.innerHTML = bajos.length === 0
-    ? '<div class="empty-state">✅ Sin alertas de stock</div>'
-    : bajos.map(a => `
-        <div class="item-row">
-        <div><div class="item-name">${a.nombre}</div><div class="item-sub">${a.categoria}</div></div>
-        <span class="badge badge-warn">${a.disponible}/${a.cantidad} disponible${a.disponible !== 1 ? 's' : ''}</span>
-        </div>`).join('');
+um.innerHTML = prs.length === 0
+? '<div class="empty-state"><span class="empty-icon">🕐</span>Sin movimientos recientes</div>'
+: prs.slice(0, 5).map(p => {
+    const cant = p.detalles ? p.detalles.reduce((s,d) => s + d.cantidad, 0) : 1;
+    return `
+        <div class="mov-row">
+        <div class="mov-icon-wrap prestado">📉</div>
+        <div class="mov-info">
+            <div class="mov-nombre">${p.nombre_solicitante}</div>
+            <div class="mov-detalle">${p.detalles?.[0]?.articulo_nombre || ''} • ${fmt(p.fecha_prestamo)}</div>
+        </div>
+        <div class="mov-cant menos">-${cant}</div>
+        </div>`;
+    }).join('');
 
 const res2 = await apiFetch('/prestamos');
 const prs  = await res2.json();

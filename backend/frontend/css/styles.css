@@ -21,7 +21,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #f1f5f9;
+  background: #e8eef6;
   color: var(--texto);
   font-size: 14px;
   min-height: 100vh;
@@ -329,7 +329,7 @@ body {
 
 .card:hover { box-shadow: var(--sombra-lg); }
 .card-title {
-  font-size: 34px; font-weight: 700; margin-bottom: 24px;
+  font-size: 14px; font-weight: 700; margin-bottom: 16px;
   color: var(--texto); padding-bottom: 12px;
   border-bottom: 2px solid #f1f5fb;
   display: flex; align-items: center; gap: 8px;

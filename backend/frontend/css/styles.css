@@ -336,7 +336,7 @@ textarea { min-height: 80px; resize: vertical; }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,92,0.45); }
 .btn-success {background: linear-gradient(135deg, #005C9E, #2678b8);color: white;box-shadow: 0 4px 14px rgba(0,92,158,0.35);}
 .btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,92,1,0,0.45); }
-.btn-warning { background: var(--azul-inst); color: white; box-shadow: 0 4px 12px rgba(0,87,168,0.3); }
+.btn-warning { background: #0057A8; color: white; border: none;box-shadow: 0 4px 12px rgba(0,87,168,0.3); }
 .btn-warning:hover { background: #0066c0; transform: translateY(-1px); }
 .btn-danger  { background: white; color: var(--rojo); border-color: var(--rojo); }
 .btn-danger:hover { background: #fff5f5; }
@@ -439,7 +439,7 @@ textarea { min-height: 80px; resize: vertical; }
   font-size: 13px;
 }
 .inv-header {
-  background: var(--azul-inst);
+  background: #0057A8;
   color: white;
   padding: 14px 20px;
   font-size: 15px;
@@ -447,7 +447,6 @@ textarea { min-height: 80px; resize: vertical; }
   display: flex;
   align-items: center;
   gap: 8px;
-  border-radius: var(--radio) var(--radio) 0 0;
 }
 .inv-table {
   width: 100%;

@@ -334,8 +334,8 @@ textarea { min-height: 80px; resize: vertical; }
 .btn:active { transform: scale(0.97); }
 .btn-primary { background: linear-gradient(135deg, var(--azul), var(--azul-mid)); color: white; box-shadow: 0 4px 14px rgba(26,58,92,0.35); }
 .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,92,0.45); }
-.btn-success { background: linear-gradient(135deg, var(--dorado), var(--dorado-dark)); color: #1e293b; box-shadow: 0 4px 14px rgba(248,195,110,0,0.35); }
-.btn-success:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(248,155,195,0,0.45); }
+.btn-success {background: linear-gradient(135deg, #005C9E, #2678b8);color: white;box-shadow: 0 4px 14px rgba(0,92,158,0.35);}
+.btn-success:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,92,158,0,0.45); }
 .btn-warning { background: linear-gradient(135deg, var(--dorado), #03c8ef); color: white; box-shadow: 0 4px 14px rgba(0, 144, 240, 0.81); }
 .btn-danger  { background: white; color: var(--rojo); border-color: var(--rojo); }
 .btn-danger:hover { background: #fff5f5; }

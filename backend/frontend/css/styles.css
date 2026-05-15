@@ -561,7 +561,7 @@ textarea { min-height: 80px; resize: vertical; }
     flex-shrink: 0;}
 .nav-icon i {
     font-size: 20px;
-    color: rgb(255, 255, 255);
+    color: white;
     transition: all 0.2s;}
 .nav-item:hover .nav-icon i {
     transform: scale(1.1);}

@@ -25,19 +25,19 @@
     <nav class="sidebar-nav">
     <div class="nav-label">MENÚ PRINCIPAL</div>
     <button class="nav-item active" onclick="showTab('inicio', this)">
-        <span class="nav-icon">🏠</span><span>Inicio</span>
+        <span class="nav-icon"></span><span>Inicio</span>
     </button>
     <button class="nav-item" onclick="showTab('prestamo', this)">
-        <span class="nav-icon">➕</span><span>Nuevo Préstamo</span>
+        <span class="nav-icon"></span><span>Nuevo Préstamo</span>
     </button>
     <button class="nav-item" onclick="showTab('activos', this)">
-        <span class="nav-icon">📦</span><span>Préstamos Activos</span>
+        <span class="nav-icon"></span><span>Préstamos Activos</span>
     </button>
     <button class="nav-item" onclick="showTab('devoluciones', this)">
-        <span class="nav-icon">📥</span><span>Devoluciones</span>
+        <span class="nav-icon"></span><span>Devoluciones</span>
     </button>
     <button class="nav-item" onclick="showTab('inventario', this)">
-        <span class="nav-icon">🗂️</span><span>Inventario</span>
+        <span class="nav-icon"></span><span>Inventario</span>
     </button>
     </nav>
 
@@ -68,17 +68,17 @@
     <div id="sec-inicio" class="section active">
         <div class="grid3">
         <div class="stat-card stat-naranja">
-            <div class="stat-icon-box stat-icon-naranja">📦</div>
+            <div class="stat-icon-box stat-icon-naranja"></div>
             <div class="stat-num" id="stat-total">—</div>
             <div class="stat-label">Artículos en inventario</div>
         </div>
         <div class="stat-card stat-azul">
-            <div class="stat-icon-box stat-icon-azul">🗂️</div>
+            <div class="stat-icon-box stat-icon-azul"></div>
             <div class="stat-num" id="stat-prestados">—</div>
             <div class="stat-label">Préstamos activos</div>
         </div>
         <div class="stat-card stat-verde">
-            <div class="stat-icon-box stat-icon-verde">✅</div>
+            <div class="stat-icon-box stat-icon-verde"></div>
             <div class="stat-num" id="stat-disponibles">—</div>
             <div class="stat-label">Unidades disponibles</div>
         </div>
@@ -86,14 +86,14 @@
         <div class="grid2-dashboard">
         <div class="card">
             <div class="card-title">
-            <div class="card-title-icon icon-naranja">⚠️</div>
+            <div class="card-title-icon icon-naranja"></div>
             Stock bajo
             </div>
             <div id="stock-bajo"></div>
         </div>
         <div class="card">
             <div class="card-title">
-            <div class="card-title-icon icon-azul">🕐</div>
+            <div class="card-title-icon icon-azul"></div>
             Últimos movimientos
             </div>
             <div id="ultimos-mov"></div>
@@ -130,7 +130,7 @@
 
         <div class="card">
         <div class="card-title">
-            <div class="card-title-icon icon-verde">📦</div>
+            <div class="card-title-icon icon-verde"></div>
             Artículo a prestar
         </div>
         <div class="form-row">
@@ -180,23 +180,23 @@
 
         <div class="card">
         <div class="card-title">
-            <div class="card-title-icon icon-morado">🛒</div>
+            <div class="card-title-icon icon-morado"></div>
             Artículos seleccionados
         </div>
         <div id="carrito-lista">
             <div class="empty-state">
-            <span class="empty-icon">📦</span>
+            <span class="empty-icon"></span>
             Sin artículos agregados aún
             </div>
         </div>
-        <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="registrarPrestamo()">✅ Confirmar Préstamo</button>
+        <button class="btn btn-primary btn-block" style="margin-top:14px;" onclick="registrarPrestamo()">Confirmar Préstamo</button>
         </div>
     </div>
 
     <!-- PRÉSTAMOS ACTIVOS -->
     <div id="sec-activos" class="section">
         <div class="card">
-        <div class="card-title">📦 Préstamos activos</div>
+        <div class="card-title"> Préstamos activos</div>
         <input type="text" class="search-box" id="buscar-activos" placeholder="🔍 Buscar por nombre o artículo..." oninput="renderActivos()">
         <div id="lista-activos"></div>
         </div>
@@ -205,7 +205,7 @@
     <!-- DEVOLUCIONES -->
     <div id="sec-devoluciones" class="section">
         <div class="card">
-        <div class="card-title">📜 Historial de devoluciones</div>
+        <div class="card-title"> Historial de devoluciones</div>
         <input type="text" class="search-box" id="buscar-dev" placeholder="🔍 Buscar..." oninput="renderDevoluciones()">
         <div id="lista-devoluciones"></div>
         </div>
@@ -236,7 +236,7 @@
 <!-- MODAL DEVOLUCIÓN -->
 <div class="modal-bg" id="modal-devolucion">
 <div class="modal">
-    <div class="modal-title">📥 Registrar devolución</div>
+    <div class="modal-title"> Registrar devolución</div>
     <div id="modal-dev-info" class="modal-info-box"></div>
     <div class="form-row">
       <label>Estado al devolver *</label>
@@ -259,7 +259,7 @@
     </div>
     <div class="modal-footer">
     <button class="btn btn-gray" onclick="closeModal('modal-devolucion')">Cancelar</button>
-    <button class="btn btn-success" onclick="confirmarDevolucion()">✅ Confirmar</button>
+    <button class="btn btn-success" onclick="confirmarDevolucion()"> Confirmar</button>
     </div>
 </div>
 </div>
@@ -267,7 +267,7 @@
 <!-- MODAL AGREGAR ARTÍCULO -->
 <div class="modal-bg" id="modal-agregar">
 <div class="modal">
-    <div class="modal-title">➕ Agregar artículo</div>
+    <div class="modal-title"> Agregar artículo</div>
     <div class="form-row"><label>Nombre *</label><input type="text" id="inv-nombre" placeholder="Nombre del artículo"></div>
     <div class="form-row">
       <label>Categoría *</label>

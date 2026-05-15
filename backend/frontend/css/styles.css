@@ -202,7 +202,7 @@ body {
   font-weight: 700; 
   border-left: 3px solid white; 
 }
-.nav-icon { font-size: 18px; width: 24px; text-align: center; }
+.nav-icon { font-size: 22px; width: 32px; }
 
 .sidebar-footer {
   padding: 16px 14px;
@@ -547,6 +547,43 @@ textarea { min-height: 80px; resize: vertical; }
 }
 .mov-icon-wrap.prestado { background: #fee2e2; }
 .mov-icon-wrap.devuelto { background: #dcfce7; }
+
+
+
+/* ===================== ICONOS FONT AWESOME EN SIDEBAR ===================== */
+.nav-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;}
+.nav-icon i {
+    font-size: 20px;
+    color: white;
+    transition: all 0.2s;}
+.nav-item:hover .nav-icon i {
+    transform: scale(1.1);}
+.nav-item.active .nav-icon i {
+    color: white;}
+/* Ajuste para que el texto no se desplace */
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    gap: 0;}
+/* Asegurar que el último icono (caja) tenga el fondo más claro como en tu imagen */
+.nav-item:last-child {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    margin-top: 8px;}
+.nav-item:last-child:hover {
+    background: rgba(255, 255, 255, 0.15);}
+.nav-item:last-child.active {
+    background: rgba(255, 255, 255, 0.20);}
+
+
 
 
 

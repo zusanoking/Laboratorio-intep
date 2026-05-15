@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INTEP Lab — Sistema de Préstamos</title>
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
@@ -22,24 +23,29 @@
     </div>
     </div>
 
-    <nav class="sidebar-nav">
+<nav class="sidebar-nav">
     <div class="nav-label">MENÚ PRINCIPAL</div>
     <button class="nav-item active" onclick="showTab('inicio', this)">
-        <span class="nav-icon"></span><span>Inicio</span>
+        <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+        <span>Inicio</span>
     </button>
     <button class="nav-item" onclick="showTab('prestamo', this)">
-        <span class="nav-icon"></span><span>Nuevo Préstamo</span>
+        <span class="nav-icon"><i class="fa-solid fa-plus"></i></span>
+        <span>Nuevo Préstamo</span>
     </button>
     <button class="nav-item" onclick="showTab('activos', this)">
-        <span class="nav-icon"></span><span>Préstamos Activos</span>
+        <span class="nav-icon"><i class="fa-solid fa-arrows-left-right"></i></span>
+        <span>Préstamos Activos</span>
     </button>
     <button class="nav-item" onclick="showTab('devoluciones', this)">
-        <span class="nav-icon"></span><span>Devoluciones</span>
+        <span class="nav-icon"><i class="fa-solid fa-rotate-right"></i></span>
+        <span>Devoluciones</span>
     </button>
     <button class="nav-item" onclick="showTab('inventario', this)">
-        <span class="nav-icon"></span><span>Inventario</span>
+        <span class="nav-icon"><i class="fa-solid fa-box"></i></span>
+        <span>Inventario</span>
     </button>
-    </nav>
+</nav>
 
     <div class="sidebar-footer">
     <div class="sidebar-user">

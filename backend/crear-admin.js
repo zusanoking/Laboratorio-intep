@@ -1,5 +1,4 @@
 // crear-admin.js
-// Ejecuta este script UNA SOLA VEZ para crear el usuario administrador
 // Comando: node crear-admin.js
 
 const bcrypt = require('bcryptjs');
@@ -15,7 +14,7 @@ const conn = await mysql.createConnection({
 });
 
 const email    = 'admin@intep.edu.co';
-  const password = 'intep2025';           // ← cambia esto
+  const password = 'intep2025';           // clave admin 
 const nombre   = 'Administrador INTEP';
 
 const hash = await bcrypt.hash(password, 10);

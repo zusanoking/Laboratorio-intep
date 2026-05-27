@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en laboratorio-intep-production.up.railway.app:${PORT}`); // http://localhost:${PORT}`); esto es lo que estaba antes 
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`); // http://localhost:${PORT}`); esto es lo que estaba antes 
   console.log(`📋 Laboratorio INTEP — Roldanillo, Valle del Cauca`);
 });
 

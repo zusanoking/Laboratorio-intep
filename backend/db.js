@@ -1,6 +1,4 @@
 const mysql = require('mysql2/promise');
-const fs    = require('fs');
-const path  = require('path');
 require('dotenv').config();
 
 const pool = mysql.createPool({
@@ -12,6 +10,9 @@ database: process.env.DB_NAME,
 waitForConnections: true,
 connectionLimit: 10,
 multipleStatements: true,
+ssl: {
+    rejectUnauthorized: false
+}
 });
 
 async function inicializarDB() {
@@ -67,6 +68,23 @@ try {
     `);
 
     await conn.query(`
+    CREATE TABLE IF NOT EXISTS detalle_prestamo (
+        id               INT AUTO_INCREMENT PRIMARY KEY,
+        prestamo_id      INT NOT NULL,
+        articulo_id      INT NOT NULL,
+        cantidad         INT DEFAULT 1,
+        estado_salida    VARCHAR(50),
+        completo_salida  VARCHAR(50),
+        observaciones    TEXT,
+        devuelto         BOOLEAN DEFAULT FALSE,
+        estado_retorno   VARCHAR(50),
+        completo_retorno VARCHAR(50),
+        fecha_devolucion DATETIME NULL,
+        FOREIGN KEY (prestamo_id) REFERENCES prestamos(id) ON DELETE CASCADE
+    );
+    `);
+
+    await conn.query(`
     CREATE TABLE IF NOT EXISTS devoluciones (
         id               INT AUTO_INCREMENT PRIMARY KEY,
         prestamo_id      INT NOT NULL UNIQUE,
@@ -90,9 +108,3 @@ try {
 
 inicializarDB();
 module.exports = pool;
-
-
-
-
-
-

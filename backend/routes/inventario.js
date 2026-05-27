@@ -73,3 +73,7 @@ router.delete('/:id', authMW, async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+

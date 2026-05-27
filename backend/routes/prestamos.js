@@ -107,4 +107,3 @@ router.post('/', authMW, async (req, res) => {
 });
 
 module.exports = router;
-

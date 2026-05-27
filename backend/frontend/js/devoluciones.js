@@ -58,3 +58,10 @@ c.innerHTML = lista.map(d => `
     </div>
     </div>`).join('');
 }
+
+
+
+
+
+
+

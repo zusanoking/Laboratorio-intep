@@ -21,7 +21,7 @@ if (!email || !password) {
 
 btn.disabled = true;
 btn.textContent = 'Ingresando...';
-console.log('Intentando login con:', email);// ← agrega esta línea
+console.log('Intentando login con:', email);
 try {
     const res  = await fetch(`${API}/auth/login`, {
     method: 'POST',
@@ -44,7 +44,3 @@ try {
     btn.textContent = 'Ingresar al sistema';
 }
 }
-
-
-
-

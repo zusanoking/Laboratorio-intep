@@ -7,7 +7,7 @@ const db      = require('../db');
 const authMW  = require('../middleware/auth');
 
 const URL_INVENTARIO = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSr09UAsIlosI3Suujtaxcwo7ETaJafOOHL3n3h1KK5BAyYaPk9-xzSbseczI9y7g/pub?output=csv';
-const URL_KITS       = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSorT31ute3jFZVLcz24l9HOmZlKc3dluldhi5HjWRsFjmK4PgGWNXgUGTEEpul5PC2MJ-SmZe2ezdD/pub?gid=399823390&single=true&output=csv';
+
 
 // POST /api/importar — importar desde Google Sheets
 router.post('/', authMW, async (req, res) => {

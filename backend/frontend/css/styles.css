@@ -574,11 +574,4 @@ textarea { min-height: 80px; resize: vertical; }
     padding: 12px 16px;
     gap: 0;}
 /* Asegurar que el último icono (caja) tenga el fondo más claro como en tu imagen */
-.nav-item:last-child {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    margin-top: 8px;}
-.nav-item:last-child:hover {
-    background: rgba(255, 255, 255, 0.15);}
-.nav-item:last-child.active {
-    background: rgba(255, 255, 255, 0.20);}
+

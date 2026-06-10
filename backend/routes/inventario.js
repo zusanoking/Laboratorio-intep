@@ -61,7 +61,7 @@ router.put('/:id', authMW, async (req, res) => {
 });
 
 // DELETE /api/inventario/:id — desactivar (no borrar físicamente)
-router.put('/:id', authMW, async (req, res) => {
+router.delete('/:id', authMW, async (req, res) => {
   const { nombre, categoria, serie, descripcion } = req.body;
   if (!nombre || !categoria) return res.status(400).json({ error: 'Faltan campos' });
   try {

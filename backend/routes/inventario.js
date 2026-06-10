@@ -61,15 +61,16 @@ router.put('/:id', authMW, async (req, res) => {
 });
 
 // DELETE /api/inventario/:id — desactivar (no borrar físicamente)
-router.delete('/:id', authMW, async (req, res) => {
-  if (req.usuario.rol !== 'admin')
-    return res.status(403).json({ error: 'Solo el administrador puede eliminar artículos' });
+router.put('/:id', authMW, async (req, res) => {
+  const { nombre, categoria, serie, descripcion } = req.body;
+  if (!nombre || !categoria) return res.status(400).json({ error: 'Faltan campos' });
   try {
-    await db.query('UPDATE inventario SET activo = 0 WHERE id = ?', [req.params.id]);
+    await db.query(
+      'UPDATE inventario SET nombre=?, categoria=?, serie=?, descripcion=?, es_kit=? WHERE id=?',
+      [nombre, categoria, serie || null, descripcion || null, categoria === 'Kit' ? 1 : 0, req.params.id]
+    );
     res.json({ ok: true });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
+  } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 module.exports = router;

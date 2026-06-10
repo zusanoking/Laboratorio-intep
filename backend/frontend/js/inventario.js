@@ -25,6 +25,7 @@ c.innerHTML = `
         <th>CATEGORÍA</th>
         <th>CANTIDAD</th>
         <th>ESTADO</th>
+        <th>ACCIONES</th>
         </tr>
     </thead>
     <tbody>
@@ -46,9 +47,73 @@ c.innerHTML = `
                 ${a.disponible === 0 ? 'Sin stock' : a.disponible + ' disponible' + (a.disponible !== 1 ? 's' : '')}
             </span>
             </td>
+            <td>
+            <div style="display:flex;gap:6px;justify-content:center;">
+                <button onclick="abrirEditar(${a.id},'${a.nombre.replace(/'/g,"\\'")}','${a.categoria}','${(a.serie||'').replace(/'/g,"\\'")}','${(a.descripcion||'').replace(/'/g,"\\'")}','${a.cantidad}')" 
+                class="btn btn-primary btn-sm" title="Editar">
+                ✏️
+                </button>
+                <button onclick="confirmarEliminar(${a.id},'${a.nombre.replace(/'/g,"\\'")}','${a.disponible}','${a.cantidad}')" 
+                class="btn btn-danger btn-sm" title="Eliminar">
+                🗑️
+                </button>
+            </div>
+            </td>
         </tr>`).join('')}
     </tbody>
     </table>`;
+}
+
+// ---- EDITAR ARTÍCULO ----
+function abrirEditar(id, nombre, categoria, serie, descripcion, cantidad) {
+document.getElementById('edit-id').value       = id;
+document.getElementById('edit-nombre').value   = nombre;
+document.getElementById('edit-cat').value      = categoria;
+document.getElementById('edit-serie').value    = serie;
+document.getElementById('edit-desc').value     = descripcion;
+document.getElementById('edit-cantidad').value = cantidad;
+openModal('modal-editar');
+}
+
+async function guardarEdicion() {
+const id     = document.getElementById('edit-id').value;
+const nombre = document.getElementById('edit-nombre').value.trim();
+if (!nombre) { showAlert('⚠️ Ingresa el nombre', 'error'); return; }
+
+const body = {
+    nombre,
+    categoria:   document.getElementById('edit-cat').value,
+    serie:       document.getElementById('edit-serie').value.trim(),
+    descripcion: document.getElementById('edit-desc').value.trim(),
+};
+
+const res  = await apiFetch(`/inventario/${id}`, { method: 'PUT', body: JSON.stringify(body) });
+const data = await res.json();
+if (!res.ok) { showAlert('❌ ' + data.error, 'error'); return; }
+
+closeModal('modal-editar');
+showAlert('✅ Artículo actualizado');
+await cargarInventario();
+cargarInicio();
+}
+
+// ---- ELIMINAR ARTÍCULO ----
+function confirmarEliminar(id, nombre, disponible, cantidad) {
+document.getElementById('del-id').value     = id;
+document.getElementById('del-nombre').textContent = nombre;
+document.getElementById('del-info').textContent   = `${disponible}/${cantidad} unidades disponibles`;
+openModal('modal-eliminar');
+}
+
+async function ejecutarEliminar() {
+const id = document.getElementById('del-id').value;
+const res  = await apiFetch(`/inventario/${id}`, { method: 'DELETE' });
+const data = await res.json();
+if (!res.ok) { showAlert('❌ ' + data.error, 'error'); return; }
+closeModal('modal-eliminar');
+showAlert('🗑️ Artículo eliminado');
+await cargarInventario();
+cargarInicio();
 }
 
 async function agregarArticulo() {

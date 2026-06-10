@@ -298,6 +298,52 @@
 </div>
 </div>
 
+<!-- MODAL EDITAR ARTÍCULO -->
+<div class="modal-bg" id="modal-editar">
+<div class="modal">
+    <div class="modal-title">✏️ Editar artículo</div>
+    <input type="hidden" id="edit-id">
+    <div class="form-row"><label>Nombre *</label><input type="text" id="edit-nombre" class="input" placeholder="Nombre del artículo"></div>
+    <div class="form-row">
+      <label>Categoría *</label>
+    <select id="edit-cat" class="input">
+        <option value="Redes">Redes</option>
+        <option value="Kit">Kit</option>
+        <option value="Herramienta">Herramienta</option>
+        <option value="Computador">Computador / Dispositivo</option>
+        <option value="Otro">Otro</option>
+    </select>
+    </div>
+    <div class="grid2">
+    <div class="form-row"><label>Cantidad</label><input type="number" id="edit-cantidad" class="input" min="1" disabled style="opacity:0.6;cursor:not-allowed;" title="La cantidad no se puede editar directamente"></div>
+    <div class="form-row"><label>Serie / Código</label><input type="text" id="edit-serie" class="input" placeholder="Opcional"></div>
+    </div>
+    <div class="form-row"><label>Descripción</label><textarea id="edit-desc" class="input" rows="3" placeholder="Descripción..." style="resize:none;"></textarea></div>
+    <div class="modal-footer">
+    <button class="btn btn-gray" onclick="closeModal('modal-editar')">Cancelar</button>
+    <button class="btn btn-primary" onclick="guardarEdicion()">💾 Guardar cambios</button>
+    </div>
+</div>
+</div>
+
+<!-- MODAL CONFIRMAR ELIMINAR -->
+<div class="modal-bg" id="modal-eliminar">
+<div class="modal">
+    <div class="modal-title">🗑️ Eliminar artículo</div>
+    <input type="hidden" id="del-id">
+    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:16px;margin-bottom:16px;">
+    <div style="font-size:14px;font-weight:700;color:#991b1b;margin-bottom:6px;">¿Eliminar este artículo?</div>
+    <div style="font-size:14px;font-weight:600;color:#1e293b;" id="del-nombre"></div>
+    <div style="font-size:12px;color:#64748b;margin-top:4px;" id="del-info"></div>
+    <div style="font-size:12px;color:#ef4444;margin-top:8px;">⚠️ No se puede eliminar si tiene préstamos activos.</div>
+    </div>
+    <div class="modal-footer">
+    <button class="btn btn-gray" onclick="closeModal('modal-eliminar')">Cancelar</button>
+    <button class="btn btn-danger" onclick="ejecutarEliminar()">🗑️ Sí, eliminar</button>
+    </div>
+</div>
+</div>
+
 <script src="js/dashboard.js"></script>
 <script src="js/inventario.js"></script>
 <script src="js/prestamos.js"></script>

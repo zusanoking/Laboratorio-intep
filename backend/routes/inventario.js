@@ -60,21 +60,20 @@ router.put('/:id', authMW, async (req, res) => {
   }
 });
 
-// DELETE /api/inventario/:id — desactivar (no borrar físicamente)
 router.delete('/:id', authMW, async (req, res) => {
-  const { nombre, categoria, serie, descripcion } = req.body;
-  if (!nombre || !categoria) return res.status(400).json({ error: 'Faltan campos' });
   try {
-    await db.query(
-      'UPDATE inventario SET nombre=?, categoria=?, serie=?, descripcion=?, es_kit=? WHERE id=?',
-      [nombre, categoria, serie || null, descripcion || null, categoria === 'Kit' ? 1 : 0, req.params.id]
+    const [prs] = await db.query(
+      'SELECT COUNT(*) as total FROM detalle_prestamo WHERE articulo_id = ? AND devuelto = 0',
+      [req.params.id]
     );
+    if (prs[0].total > 0)
+      return res.status(400).json({ error: 'No se puede eliminar — tiene préstamos activos' });
+
+    await db.query('UPDATE inventario SET activo = 0 WHERE id = ?', [req.params.id]);
     res.json({ ok: true });
-  } catch (e) { res.status(500).json({ error: e.message }); }
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 module.exports = router;
-
-
-
-

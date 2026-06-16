@@ -59,6 +59,16 @@ function agregarAlCarrito() {
     showAlert('⚠️ Ese artículo ya está en la lista', 'error'); return;
   }
 
+  const MAX_ARTICULOS = 5;        // ponemos una restricion de prestar un maximo de 5 articulos 
+
+  if (_carrito.length >= MAX_ARTICULOS) {
+    showAlert(
+      `⚠️ Solo se permiten ${MAX_ARTICULOS} artículos por préstamo`,
+      'error'
+    );
+    return;
+  }
+
   _carrito.push({
     articulo_id:    parseInt(sel.value),
     nombre:         opt.dataset.nombre,

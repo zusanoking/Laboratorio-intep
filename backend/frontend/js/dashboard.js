@@ -1,8 +1,8 @@
 // js/dashboard.js — utilidades compartidas y arranque del dashboard
-const API    = '/api';
-const token  = localStorage.getItem('token');
+const API    = '/api';                                  //direcion de las rutas 
+const token  = localStorage.getItem('token');          
 const nombre = localStorage.getItem('nombre');
-if (!token) window.location.href = 'index.html';
+if (!token) window.location.href = 'index.html';  // verifica si el usiario inico secion o no 
 
 function cerrarSesion() {
 localStorage.clear();
@@ -66,6 +66,3 @@ function badgeCompleto(c) {
 if (!c || c === 'N/A') return '';
 return `<span class="badge ${c === 'Completo' ? 'badge-ok' : 'badge-warn'}">${c}</span>`;
 }
-
-
-

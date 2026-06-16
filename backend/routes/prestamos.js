@@ -50,6 +50,15 @@ router.post('/', authMW, async (req, res) => {
     articulos // array: [{articulo_id, cantidad, estado_salida, completo_salida, observaciones}]
   } = req.body;
 
+  const MAX_ARTICULOS = 5;        // NOS DICE QUE SOLO PODEMOS PRESTAR UN MAXIMO DE 5 OBJETOS 
+
+  if (!articulos || articulos.length > MAX_ARTICULOS) {
+    return res.status(400).json({
+        ok: false,
+        msg: `Solo se permiten ${MAX_ARTICULOS} artículos por préstamo`
+    });
+}
+
   if (!nombre_solicitante || !tipo_persona || !articulos || articulos.length === 0)
     return res.status(400).json({ error: 'Faltan campos requeridos' });
 
